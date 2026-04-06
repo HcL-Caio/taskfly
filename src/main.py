@@ -1,72 +1,38 @@
 import json
-import os
 from src.core import TaskFlyCore
 
 
-DATA_FILE = "taskfly_data.json"
-
-
 def load_data():
-    if os.path.exists(DATA_FILE):
-        with open(DATA_FILE, "r", encoding="utf-8") as f:
+    try:
+        with open('taskfly_data.json', 'r') as f:
             return json.load(f)
-    return None
+    except FileNotFoundError:
+        return {'xp': 0, 'level': 1, 'medals': []}
 
 
 def save_data(data):
-    with open(DATA_FILE, "w", encoding="utf-8") as f:
-        json.dump(data, f, indent=4)
+    with open('taskfly_data.json', 'w') as f:
+        json.dump(data, f)
 
 
 def main():
-    print("=== Bem-vindo ao TaskFly! 🚀 ===")
     user_data = load_data()
-    system = TaskFlyCore(user_data)
-
+    core = TaskFlyCore(user_data)
+    print("--- Bem-vindo ao TaskFly ---")
     while True:
-        xp = system.user_data['xp']
-        lvl = system.user_data['level']
-        medals = len(system.user_data['medals'])
-
-        print(f"\n[ Nível: {lvl} | XP: {xp} | Medalhas: {medals} ]")
-        print("1. Concluir uma Tarefa")
-        print("2. Ver minhas Medalhas")
-        print("3. Sair")
-
-        escolha = input("Escolha uma opção: ")
-
-        if escolha == '1':
-            tarefa = input("Qual tarefa você concluiu? ")
-            dificuldade = input("Dificuldade (easy/medium/hard): ").lower()
-
-            if dificuldade not in ['easy', 'medium', 'hard']:
-                print("Dificuldade inválida. Usando 'medium' por padrão.")
-                dificuldade = 'medium'
-
-            msg = system.complete_task(tarefa, dificuldade)
-            print(f"\n✅ {msg}")
-
-            medalha_msg = system.check_medals()
-            if medalha_msg:
-                print(f"🎉 {medalha_msg}")
-
-            save_data(system.user_data)
-
-        elif escolha == '2':
-            print("\n--- Suas Medalhas ---")
-            if not system.user_data['medals']:
-                print("Você ainda não tem medalhas. Continue focado!")
-            else:
-                for m in system.user_data['medals']:
-                    print(f"🏅 {m}")
-
-        elif escolha == '3':
-            print("\nAté a próxima! Voe alto! 🦅\n")
+        print(f"\nNível: {core.user_data['level']} | XP: {core.user_data['xp']}")
+        print("1. Adicionar Tarefa\n2. Ver Medalhas\n3. Sair")
+        op = input("Escolha: ")
+        if op == '1':
+            desc = input("Tarefa: ")
+            diff = input("Dificuldade (easy/medium/hard): ")
+            core.complete_task(desc, diff)
+            save_data(core.user_data)
+        elif op == '2':
+            print(f"Medalhas: {', '.join(core.user_data['medals'])}")
+        elif op == '3':
             break
 
-        else:
-            print("\nOpção inválida. Tente novamente.")
 
-
-if __name__ == "__main__":
+if __name__ == '__main__':
     main()
