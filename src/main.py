@@ -27,6 +27,7 @@ def main():
         xp = system.user_data['xp']
         lvl = system.user_data['level']
         medals = len(system.user_data['medals'])
+        
         print(f"\n[ Nível: {lvl} | XP: {xp} | Medalhas: {medals} ]")
         print("1. Concluir uma Tarefa")
         print("2. Ver minhas Medalhas")
@@ -37,6 +38,7 @@ def main():
         if escolha == '1':
             tarefa = input("Qual tarefa você concluiu? ")
             dificuldade = input("Dificuldade (easy/medium/hard): ").lower()
+            
             if dificuldade not in ['easy', 'medium', 'hard']:
                 print("Dificuldade inválida. Usando 'medium' por padrão.")
                 dificuldade = 'medium'
@@ -61,8 +63,10 @@ def main():
         elif escolha == '3':
             print("\nAté a próxima! Voe alto! 🦅\n")
             break
+            
         else:
             print("\nOpção inválida. Tente novamente.")
-            
+
+
 if __name__ == "__main__":
     main()
