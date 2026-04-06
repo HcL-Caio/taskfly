@@ -15,6 +15,7 @@ class TaskFlyCore:
             self._award_medal()
 
     def _award_medal(self):
-        m = f"Medalha Nível {self.user_data['level']}"
+        lvl = self.user_data['level']
+        m = f"Medalha Nível {lvl}"
         if m not in self.user_data['medals']:
             self.user_data['medals'].append(m)
