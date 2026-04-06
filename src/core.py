@@ -21,9 +21,8 @@ class TaskFlyCore:
         # Exemplo: Medalha de Iniciante ao chegar no Level 2
         level_ok = self.user_data["level"] >= 2
         medal_missing = "Iniciante Alado" not in self.user_data["medals"]
-        
         if level_ok and medal_missing:
             self.user_data["medals"].append("Iniciante Alado")
             return "Nova Medalha Desbloqueada: Iniciante Alado! 🥇"
-            
+    
         return None
