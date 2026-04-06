@@ -17,3 +17,4 @@ def test_subida_nivel():
     sistema = TaskFlyCore({'xp': 90, 'level': 1, 'medals': []})
     sistema.complete_task("Teste", "medium")
     assert sistema.user_data['level'] == 2
+    assert sistema.user_data['xp'] == 10
