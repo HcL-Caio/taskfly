@@ -1,27 +1,20 @@
 class TaskFlyCore:
-    def __init__(self, user_data=None):
-        self.user_data = user_data or {"xp": 0, "level": 1, "medals": []}
+    def __init__(self, user_data):
+        self.user_data = user_data or {'xp': 0, 'level': 1, 'medals': []}
 
-    def complete_task(self, task_name, difficulty="medium"):
-        # Regra de negócio: XP baseado na dificuldade
-        xp_map = {"easy": 10, "medium": 20, "hard": 50}
-        gain = xp_map.get(difficulty, 10)
+    def complete_task(self, description, difficulty):
+        xp_map = {'easy': 10, 'medium': 20, 'hard': 50}
+        gain = xp_map.get(difficulty.lower(), 10)
+        self.user_data['xp'] += gain
+        self._check_level_up()
 
-        self.user_data["xp"] += gain
+    def _check_level_up(self):
+        if self.user_data['xp'] >= 100:
+            self.user_data['level'] += 1
+            self.user_data['xp'] -= 100
+            self._award_medal()
 
-        # Lógica de Level Up (Simples: cada 100 XP sobe um nível)
-        new_level = (self.user_data["xp"] // 100) + 1
-        if new_level > self.user_data["level"]:
-            self.user_data["level"] = new_level
-            return f"Parabéns! Você subiu para o nível {new_level}!"
-
-        return f"Tarefa '{task_name}' concluída! +{gain} XP."
-
-    def check_medals(self):
-        # Exemplo: Medalha de Iniciante ao chegar no Level 2
-        level_ok = self.user_data["level"] >= 2
-        medal_missing = "Iniciante Alado" not in self.user_data["medals"]
-        if level_ok and medal_missing:
-            self.user_data["medals"].append("Iniciante Alado")
-            return "Nova Medalha Desbloqueada: Iniciante Alado! 🥇"
-            return None
+    def _award_medal(self):
+        m = f"Medalha Nível {self.user_data['level']}"
+        if m not in self.user_data['medals']:
+            self.user_data['medals'].append(m)
