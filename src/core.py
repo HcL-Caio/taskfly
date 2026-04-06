@@ -24,5 +24,4 @@ class TaskFlyCore:
         if level_ok and medal_missing:
             self.user_data["medals"].append("Iniciante Alado")
             return "Nova Medalha Desbloqueada: Iniciante Alado! 🥇"
-    
-        return None
+            return None
