@@ -1,25 +1,39 @@
-name: CI - TaskFly
+name: CI
+
+
 
 on: [push, pull_request]
 
+
+
 jobs:
+
   build:
+
     runs-on: ubuntu-latest
 
+
+
     steps:
-      - name: Checkout do código
-        uses: actions/checkout@v3
 
-      - name: Configurar Node.js
-        uses: actions/setup-node@v3
+      - uses: actions/checkout@v3
+
+
+
+      - uses: actions/setup-python@v4
+
         with:
-          node-version: "18"
 
-      - name: Instalar Dependências
-        run: npm install
+          python-version: "3.11"
 
-      - name: Executar Linting (Análise Estática)
-        run: npm run lint
 
-      - name: Executar Testes Automatizados
-        run: npm test -- --watchAll=false
+
+      - run: pip install -r requirements.txt
+
+
+
+      - run: flake8 . --max-line-length=100
+
+
+
+      - run: pytest
