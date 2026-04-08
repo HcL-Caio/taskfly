@@ -14,7 +14,6 @@ def test_conclusao_tarefa():
 
 
 def test_subida_nivel():
-    # Se tem 90 e ganha 20, vai para 110. Sobe o nível e SOBRA 10
     sistema = TaskFlyCore({'xp': 90, 'level': 1, 'medals': []})
     sistema.complete_task("Teste", "medium")
     assert sistema.user_data['level'] == 2
