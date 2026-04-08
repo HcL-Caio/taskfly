@@ -1,7 +1,6 @@
 import json
 from src.core import TaskFlyCore
 
-
 def load_data():
     try:
         with open('taskfly_data.json', 'r') as f:
@@ -9,11 +8,9 @@ def load_data():
     except FileNotFoundError:
         return {'xp': 0, 'level': 1, 'medals': []}
 
-
 def save_data(data):
     with open('taskfly_data.json', 'w') as f:
         json.dump(data, f)
-
 
 def main():
     user_data = load_data()
@@ -32,7 +29,6 @@ def main():
             print(f"Medalhas: {', '.join(core.user_data['medals'])}")
         elif op == '3':
             break
-
 
 if __name__ == '__main__':
     main()
