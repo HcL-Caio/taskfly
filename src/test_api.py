@@ -16,9 +16,7 @@ class TestIntegracaoAPI(unittest.TestCase):
                 "advice": "Sempre escreva testes automatizados!"
             }
         }
-        
         frase = obter_frase_motivacional()
-        
         self.assertEqual(frase, "Sempre escreva testes automatizados!")
         mock_get.assert_called_once_with("https://api.adviceslip.com/advice")
 
