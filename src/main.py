@@ -1,6 +1,6 @@
 import json
 from src.core import TaskFlyCore
-
+from api import obter_frase_motivacional 
 
 def load_data():
     try:
@@ -9,16 +9,20 @@ def load_data():
     except FileNotFoundError:
         return {'xp': 0, 'level': 1, 'medals': []}
 
-
 def save_data(data):
     with open('taskfly_data.json', 'w') as f:
         json.dump(data, f)
 
-
 def main():
     user_data = load_data()
     core = TaskFlyCore(user_data)
+    
     print("--- Bem-vindo ao TaskFly ---")
+    
+    print("Buscando sua dose de motivação...")
+    frase_do_dia = obter_frase_motivacional()
+    print(f"💡 Dica do dia: {frase_do_dia}\n")
+    
     while True:
         print(f"\nNível: {core.user_data['level']} | XP: {core.user_data['xp']}")
         print("1. Adicionar Tarefa\n2. Ver Medalhas\n3. Sair")
@@ -29,10 +33,12 @@ def main():
             core.complete_task(desc, diff)
             save_data(core.user_data)
         elif op == '2':
-            print(f"Medalhas: {', '.join(core.user_data['medals'])}")
+            
+            medalhas = ', '.join(core.user_data['medals']) if core.user_data['medals'] else 'Nenhuma ainda'
+            print(f"Medalhas: {medalhas}")
         elif op == '3':
+            print("Saindo... Continue voando alto com o TaskFly!")
             break
-
 
 if __name__ == '__main__':
     main()
