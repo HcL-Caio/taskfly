@@ -1,6 +1,8 @@
 import unittest
 from unittest.mock import patch
+
 from api import obter_frase_motivacional
+
 
 class TestIntegracaoAPI(unittest.TestCase):
 
@@ -14,15 +16,12 @@ class TestIntegracaoAPI(unittest.TestCase):
                 "advice": "Sempre escreva testes automatizados!"
             }
         }
-
-
-        frase = obter_frase_motivacional()
-
-
-        self.assertEqual(frase, "Sempre escreva testes automatizados!")
         
-
+        frase = obter_frase_motivacional()
+        
+        self.assertEqual(frase, "Sempre escreva testes automatizados!")
         mock_get.assert_called_once_with("https://api.adviceslip.com/advice")
+
 
 if __name__ == '__main__':
     unittest.main()
