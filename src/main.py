@@ -2,6 +2,8 @@ import json
 from src.core import TaskFlyCore
 from src.api import get_advice
 
+print("\n💡 Conselho do dia:")
+print(get_advice())
 
 def load_data():
     try:
