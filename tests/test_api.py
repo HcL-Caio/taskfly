@@ -1,4 +1,5 @@
-from src.api import get_advice
+from api import get_advice
+
 
 def test_get_advice():
     advice = get_advice()
