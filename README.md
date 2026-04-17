@@ -13,6 +13,8 @@ Pessoas com TDAH (Transtorno do Déficit de Atenção com Hiperatividade) ou dif
 ## 💡 Proposta da Solução
 O **TaskFly** é uma aplicação de linha de comando (CLI) que utiliza a gamificação para transformar obrigações diárias em "missões". Ao concluir tarefas, o sistema fornece recompensas virtuais imediatas, estimulando o engajamento contínuo e ajudando na manutenção da rotina de forma lúdica.
 
+Além disso, o sistema agora conta com **integração com API externa**, exibindo conselhos motivacionais dinâmicos ao usuário, reforçando o foco e a disciplina.
+
 ---
 
 ## 👥 Público-Alvo
@@ -21,30 +23,94 @@ Jovens e adultos com TDAH, estudantes, ou qualquer pessoa que tenha dificuldade 
 ---
 
 ## ✨ Funcionalidades Principais
-- **Sistema de Recompensas:** Ganhe pontos de experiência (XP) baseados na dificuldade da tarefa concluída (Fácil: 10, Médio: 20, Difícil: 50).
-- **Progressão de Níveis:** A cada 100 XP acumulados, o usuário sobe de nível.
-- **Conquistas e Medalhas:** Desbloqueio de medalhas automáticas ao atingir marcos específicos (ex: "Iniciante Alado" no Nível 2).
-- **Persistência de Dados:** O progresso do usuário é salvo automaticamente em um arquivo `taskfly_data.json` local.
-- **Interface CLI:** Menu interativo no terminal para gerenciar as tarefas e visualizar o status do jogador.
+- 🎮 Sistema de recompensas (XP por tarefa)
+- 📈 Progressão de níveis
+- 🏆 Sistema de medalhas e conquistas
+- 💾 Salvamento automático em JSON
+- 🖥️ Interface CLI interativa
+- 🌐 Integração com API de conselhos motivacionais
+- 💡 Exibição de conselho do dia ao iniciar o sistema
+
+---
+
+## 🌐 API Utilizada
+Este projeto utiliza a API pública **Advice Slip**:
+
+👉 https://api.adviceslip.com/
+
+A API fornece conselhos motivacionais aleatórios que são exibidos ao iniciar a aplicação, tornando a experiência mais dinâmica e engajadora.
 
 ---
 
 ## 🛠️ Tecnologias Utilizadas
 - **Linguagem:** Python 3.x
 - **Persistência de Dados:** JSON (biblioteca nativa)
+- **Consumo de API:** Requests
 - **Testes Automatizados:** Pytest
-- **Padronização e Linting:** Flake8 (Padrão PEP 8)
+- **Padronização e Linting:** Flake8 (PEP 8)
 - **Integração Contínua (CI):** GitHub Actions
 
 ---
 
-## 🔗 Repositório
-https://github.com/HcL-Caio/taskfly
+## ⚙️ Instalação e Execução
 
----
-
-## ⚙️ Instalação
 ```bash
-git clone https://github.com/HcL-Caio/taskfly.git
-cd taskfly
+### 1. Clonar o repositório
+- git clone https://github.com/HcL-Caio/taskfly.git
+- cd taskfly
+
+### 2. Instalar dependências
 pip install -r requirements.txt
+
+### 3. Executar o sistema
+python src/main.py
+
+### 4. Executar Testes
+pytest
+
+### 5. Executar Lint
+flake8 . --max-line-length=100
+
+### 6. Estrutura do Projeto
+taskfly/
+│── src/
+│   ├── main.py
+│   ├── core.py
+│   └── api.py
+│
+│── tests/
+│   └── test_api.py
+│
+│── .github/workflows/
+│   └── ci.yml
+│
+│── requirements.txt
+│── README.md
+
+### 7. Integração Contínua (CI)
+
+O projeto utiliza GitHub Actions para garantir qualidade automática do código:
+
+- Instala dependências
+- Executa lint (flake8)
+- Executa testes automatizados (pytest)
+
+Tudo isso roda automaticamente a cada push ou pull request.
+
+### 8. Funcionalidade da Etapa Intermediária
+
+Foi implementada a integração com uma API externa (Advice Slip), permitindo que o sistema exiba conselhos motivacionais em tempo real.
+
+Essa funcionalidade adiciona valor ao projeto ao tornar a experiência mais interativa e incentivar o usuário a manter consistência nas tarefas.
+
+### 9. Versionamento
+
+Versão atual: 1.0.0
+
+### 10. Autor
+
+Caio Siqueira Amaral
+
+### 11. Repositório
+
+https://github.com/HcL-Caio/taskfly
