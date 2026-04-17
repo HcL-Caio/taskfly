@@ -1,5 +1,5 @@
 # 🦅 TaskFly - Gerenciador de Tarefas Gamificado
-![CI](https://github.com/SEU_USUARIO/taskfly/actions/workflows/ci.yml/badge.svg)
+![CI](https://github.com/HcL-Caio/taskfly/actions/workflows/ci.yml/badge.svg)
 
 **Versão Atual:** 1.0.0
 
