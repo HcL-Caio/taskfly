@@ -21,7 +21,6 @@ def main():
     core = TaskFlyCore(user_data)
 
     print("--- Bem-vindo ao TaskFly ---")
-
     print("\n💡 Conselho do dia:")
     print(get_advice())
 
@@ -38,9 +37,12 @@ def main():
             save_data(core.user_data)
 
         elif op == '2':
-            print(f"Medalhas: {', '.join(core.user_data['medals'])}")
+            user_medals = core.user_data['medals']
+            medalhas = ', '.join(user_medals) if user_medals else 'Nenhuma ainda'
+            print(f"Medalhas: {medalhas}")
 
         elif op == '3':
+            print("Saindo... Continue voando alto com o TaskFly!")
             break
 
 
